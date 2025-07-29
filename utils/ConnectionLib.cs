@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PrimS.Telnet;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.NetworkInformation;
@@ -43,8 +44,18 @@ namespace HuaweiONTRestart.utils
             }
         }
 
-        public void RebootONT()
+        [Obsolete]
+        public async Task RebootONT(string IP)
         {
+            using var client = new Client(IP, 23, new CancellationToken());
+            Thread.Sleep(1500);
+
+            await client.WriteLineAsync("root");
+            Thread.Sleep(1500);
+            await client.WriteLineAsync("admin");
+
+            Thread.Sleep(1500);
+            await client.WriteLineAsync("reset");
 
         }
     }
