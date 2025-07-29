@@ -25,7 +25,7 @@ namespace HuaweiONTRestart.utils
 
             return true;
         }
-        public async Task<string> GetIPAddress()
+        public async Task<string?> GetIPAddress()
         {
             HttpClient client = new HttpClient();
             try
@@ -38,7 +38,8 @@ namespace HuaweiONTRestart.utils
             }
             catch (Exception e)
             {
-                return "Error";
+                Console.WriteLine("Erro, código: " + e.ToString());
+                return null;
             }
         }
 
